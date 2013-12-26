@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+  <head>
+
+    <title>jQuery Blicker plugin example page</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../jquery.blicker.js"></script>
+
+    <script type="text/javascript">
+
+      $(document).ready(function () {
+
+        $("#background-curtain").blicker({
+          autostart: true,
+          blickDuration: 1000,
+          silenceDuration: 4000,
+          images: [
+            "01-blue_cabot_trail_scenery.jpg",
+            "02-annestown_beach.jpg",
+            "03-croagh_patrick_mountain.jpg"
+          ]
+        });
+
+      });
+
+    </script>
+
+    <style type="text/css">
+
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      body {
+        background-color: black;
+      }
+
+      h1, p {
+        margin: 30px 60px;
+      }
+
+      p {
+        text-align: justify;
+      }
+
+      a {
+        color: black;
+      }
+
+      #background-curtain {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: -1000;
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <div id="background-curtain">&nbsp;</div>
+
+    <h1>jQuery Blicker plugin example page</h1>
+
+    <p>
+      All used photos are distributed under
+      Creative Commons license by Nicolas Raymond
+      at <a href="http://www.flickr.com/photos/82955120@N05/">Flickr</a>.
+    </p>
+
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elit lacus,
+      molestie ut tempus in, molestie sed sapien. Praesent lectus libero, congue
+      quis nulla at, pellentesque cursus risus. In hac habitasse platea
+      dictumst. Praesent quis iaculis dui. Maecenas tempor est a arcu consequat
+      euismod. In non massa tortor. Aenean eget sapien mattis, condimentum mi
+      sit amet, placerat ante. Curabitur eu elit et velit pellentesque
+      ullamcorper. Etiam et ligula justo. Phasellus rhoncus leo est, vel
+      ultricies massa tincidunt sed. Aenean sed dui eros. Suspendisse vestibulum
+      mattis dolor, vitae viverra risus pharetra in. Maecenas ut purus ultricies
+      augue consectetur tempus et eu mi. Integer nisi eros, condimentum
+      tincidunt enim interdum, dignissim ullamcorper arcu. Etiam erat nibh,
+      lobortis vitae libero commodo, faucibus iaculis enim.
+    </p>
+
+    <p>
+      Nulla placerat tempus velit, id euismod enim tempor non. Etiam vitae lacus
+      vel nulla tempus adipiscing. Etiam ut posuere nibh. Suspendisse potenti.
+      Pellentesque diam eros, pulvinar vitae urna at, euismod elementum enim.
+      Fusce adipiscing enim nunc, ac porttitor diam malesuada in. In ac ultrices
+      purus.
+    </p>
+
+  </body>
+
+</html>
