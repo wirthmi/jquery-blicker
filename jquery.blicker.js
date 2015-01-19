@@ -18,7 +18,7 @@
  */
 
 
-(function( $ ) {
+( function ( $ ) {
 
   /**
    * This "class" implements all plugin's behaviour.
@@ -28,7 +28,6 @@
     // reference to the plugin's current instance
     var instance = this;
 
-
     var defaultOptions = {
       autostart: true,
       blickDuration: 1000,
@@ -36,25 +35,24 @@
       images: [ "background.jpg" ]
     };
 
-    var options = {};
+    var options = { };
     var imageIndex = 0;
     var intervalHandle = false;
-
 
     /**
      * This "private" method drops all content of the blicker element and
      * builds new one with expected properties and structure.
      */
-    var prepareBlickerStructure = function() {
+    var prepareBlickerStructure = function ( ) {
 
-      blicker.empty();
+      blicker.empty( );
 
       blicker.append(
         document.createElement( "div" ),
         document.createElement( "div" )
       );
 
-      blicker.children().css({
+      blicker.children( ).css( {
         "width": "100%",
         "height": "100%",
         "margin": "0px",
@@ -63,58 +61,47 @@
         "background-repeat": "no-repeat",
         "background-position": "center center",
         "background-size": "cover"
-      });
+      } );
 
       blicker.children( ":nth-child(1)" ).css( "display", "block" );
       blicker.children( ":nth-child(2)" ).css( "display", "none" );
-
     };
-
 
     /**
      * This "private" method returns currently visible blicker's child.
      */
-    var getVisibleChild = function() {
+    var getVisibleChild = function ( ) {
 
       return blicker.children( "div:visible" ).eq( 0 );
-
     };
-
 
     /**
      * This "private" method returns currently hidden blicker's child.
      */
-    var getHiddenChild = function() {
+    var getHiddenChild = function ( ) {
 
       return blicker.children( "div:not(:visible)" ).eq( 0 );
-
     };
-
 
     /**
      * This "private" method sets the current image index to a seed value.
      */
-    var randomizeImageIndex = function() {
+    var randomizeImageIndex = function ( ) {
 
-      imageIndex = (
-        Math.floor( $.now() / options.silenceDuration )
-        % options.images.length
-      );
-
+      imageIndex =
+        Math.floor( $.now( ) / options.silenceDuration ) %
+        options.images.length;
     };
-
 
     /**
      * This "private" method changes current image index to a next valid value.
      */
-    var updateImageIndex = function() {
+    var updateImageIndex = function ( ) {
 
       if ( ++imageIndex >= options.images.length ) {
         imageIndex = 0;
       }
-
     };
-
 
     /**
      * This "private" method loads an image determined by the current image
@@ -122,40 +109,32 @@
      */
     var loadImageIntoChildAccordingToImageIndex = function( child ) {
 
-      updateImageIndex();
+      updateImageIndex( );
 
       child.css(
-        "background-image",
-        "url('" + options.images[ imageIndex ] + "')"
+        "background-image", "url('" + options.images[ imageIndex ] + "')"
       );
-
     };
-
 
     /**
      * This "private" method makes blicker to blick once.
      */
-    var performSingleBlick = function() {
+    var performSingleBlick = function ( ) {
 
       var halfBlickDuration =
         Math.floor( options.blickDuration / 2 );
 
-      getVisibleChild().fadeOut( halfBlickDuration, function () {
-
-        var hiddenChild = getHiddenChild();
-
+      getVisibleChild( ).fadeOut( halfBlickDuration, function ( ) {
+        var hiddenChild = getHiddenChild( );
         loadImageIntoChildAccordingToImageIndex( hiddenChild );
         hiddenChild.fadeIn( halfBlickDuration );
-
-      });
-
+      } );
     };
-
 
     /**
      * This "public" method makes blicker to start blicking.
      */
-    instance.startBlicking = function() {
+    instance.startBlicking = function ( ) {
 
       var isAlreadyBlicking = ( intervalHandle !== false );
       var isBlickingPossible = ( options.images.length > 0 );
@@ -163,49 +142,43 @@
       if ( !isAlreadyBlicking && isBlickingPossible ) {
 
         // at first set initial image
-        loadImageIntoChildAccordingToImageIndex( getVisibleChild() );
+        loadImageIntoChildAccordingToImageIndex( getVisibleChild( ) );
 
         // now plan later image blicks
         intervalHandle =
           setInterval( performSingleBlick, options.silenceDuration );
-
       }
-
     };
-
 
     /**
      * This "public" method makes blicker to stop blicking.
      */
-    instance.stopBlicking = function() {
+    instance.stopBlicking = function( ) {
 
       // disable all planned image blicks
       clearInterval( intervalHandle );
       intervalHandle = false;
-
     };
 
 
     /**
      * Plugin's "public" constructor.
      */
-    instance.init = function() {
+    instance.init = function( ) {
 
       // gather final options for running the plugin
-      options = $.extend({}, defaultOptions, userOptions );
+      options = $.extend( { }, defaultOptions, userOptions );
 
-      prepareBlickerStructure();
-      randomizeImageIndex();
+      prepareBlickerStructure( );
+      randomizeImageIndex( );
 
       if ( options.autostart ) {
-        instance.startBlicking();
+        instance.startBlicking( );
       }
-
     };
 
     // don't forget to actually run the plugin's constructor
-    instance.init();
-
+    instance.init( );
   };
 
 
@@ -215,23 +188,18 @@
   $.fn.blicker = function( options ) {
 
     var PLUGIN_DATA_KEY = "blicker";
+    var blicker = $( this );
 
-    var blicker = $(this);
-
-    return this.each(function() {
+    return this.each( function ( ) {
 
       var isPluginInstanceAlreadyAttached =
         ( typeof blicker.data( PLUGIN_DATA_KEY ) !== "undefined" );
 
       if ( !isPluginInstanceAlreadyAttached ) {
-
         var pluginInstance = new $.blickerPlugin( blicker, options );
         blicker.data( PLUGIN_DATA_KEY, pluginInstance );
-
       }
-
-    });
-
+    } );
   };
 
-})( jQuery );
+} )( jQuery );
